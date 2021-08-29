@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTheme } from "@material-ui/core/styles";
 // Components
 import { Route, Switch } from "react-router-dom";
@@ -7,12 +7,12 @@ import DrawerPrimary from "./components/DrawerPrimary";
 
 // Pages
 import Home from "./pages/Home";
-import Trending from "./pages/Trending";
 import Search from "./pages/Search";
+import Trending from "./pages/Trending";
 import Watch from "./pages/Watch";
 
 const App = () => {
-  const [isDrawerOpen, setDrawerOpen] = React.useState(false);
+  const [isDrawerOpen, setDrawerOpen] = useState(false);
   const theme = useTheme();
   return (
     <div>
