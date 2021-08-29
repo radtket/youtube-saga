@@ -1,6 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import CATEGORIES from "../store/modules/videos/categories/actions";
+import TRENDING from "../store/modules/videos/trending/actions";
 
 const Home = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const doit = () => {
+      dispatch(TRENDING.actions.request());
+      dispatch(CATEGORIES.actions.request());
+    };
+
+    doit();
+  }, [dispatch]);
+
   return (
     <div>
       <p>

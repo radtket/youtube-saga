@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 // Components
 import { Route, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar";
@@ -11,20 +11,25 @@ import Search from "./pages/Search";
 import Trending from "./pages/Trending";
 import Watch from "./pages/Watch";
 
+const useStyles = makeStyles(theme => {
+  return {
+    main: {
+      flexGrow: 1,
+      padding: theme.spacing(3),
+    },
+    toolbar: theme.mixins.toolbar,
+  };
+});
+
 const App = () => {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
-  const theme = useTheme();
+  const { main, toolbar } = useStyles();
   return (
     <div>
       <Navbar {...{ setDrawerOpen }} />
       <DrawerPrimary {...{ isDrawerOpen, setDrawerOpen }} />
-      <main
-        style={{
-          flexGrow: 1,
-          padding: theme.spacing(3),
-        }}
-      >
-        <div style={theme.mixins.toolbar} />
+      <main className={main}>
+        <div className={toolbar} />
         <Switch>
           <Route component={Trending} path="/feed/trending" />
           <Route component={Search} path="/results" />

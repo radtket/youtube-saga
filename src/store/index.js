@@ -5,8 +5,9 @@ import createRootReducer from "./reducers";
 import sagas from "./sagas";
 
 const configureStore = history => {
+  const sagaMiddleware = createSagaMiddleware();
   const enhancers = [];
-  const middleware = [createSagaMiddleware(sagas), routerMiddleware(history)];
+  const middleware = [sagaMiddleware, routerMiddleware(history)];
 
   if (process.env.NODE_ENV !== "production") {
     // eslint-disable-next-line no-underscore-dangle
@@ -22,7 +23,7 @@ const configureStore = history => {
   );
 
   const store = createStore(createRootReducer(history), composedEnhancers);
-
+  sagaMiddleware.run(sagas);
   return store;
 };
 
